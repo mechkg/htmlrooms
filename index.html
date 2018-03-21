@@ -1,0 +1,51 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Rooms</title>
+    <style>
+        html {
+            height: 100%;
+        }
+
+        body {
+            padding: 0px;
+            margin: 0px;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+<div style="margin: 8px">
+    <div>
+        <label>Number of rooms: </label>
+        <input id="numberOfRooms" type="number" value="30" step="1" min="5" max="100">
+    </div>
+
+    <div>
+        <label>Algorithm: </label>
+        <select id="algorithmSelect">
+            <option value="1">Separation</option>
+            <option value="2">Minimise distance</option>
+            <option value="3">Tetris</option>
+        </select>
+    </div>
+
+    <div>
+        <label>Step delay (ms): </label>
+        <input id="stepDelay" type="number" value="30" step="10" min="10" max="500">
+    </div>
+
+    <div>
+        <button id="startButton" style="font-size: 100%;">Start</button>
+    </div>
+</div>
+
+<canvas id="canvas" style="flex-grow: 1; background: darkslategray; margin: 8px"></canvas>
+
+<script src="js/htmlrooms-fastopt.js"></script>
+
+</body>
+</html>
