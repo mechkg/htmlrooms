@@ -3290,7 +3290,7 @@ $c_Ltech_windswept_htmlrooms_Main$.prototype.init__V = (function() {
       $m_Ltech_windswept_htmlrooms_Main$().update__V()
     }), updateInterval)))
   } else if ((x1 === "3")) {
-    this.algorithmState$1 = new $c_s_Some().init___O(new $c_Ltech_windswept_htmlrooms_TetrisState().init___());
+    this.algorithmState$1 = new $c_s_Some().init___O($m_Ltech_windswept_htmlrooms_TetrisAlgorithm$().init__I__I__I__Ltech_windswept_htmlrooms_TetrisState(number, 4, 15));
     this.updateIntervalId$1 = new $c_s_Some().init___O($uI($m_Lorg_scalajs_dom_package$().window__Lorg_scalajs_dom_raw_Window().setInterval((function() {
       $m_Ltech_windswept_htmlrooms_Main$();
       $m_Ltech_windswept_htmlrooms_Main$().update__V()
@@ -3413,9 +3413,6 @@ $h_Ltech_windswept_htmlrooms_Utils$.prototype = $c_Ltech_windswept_htmlrooms_Uti
 $c_Ltech_windswept_htmlrooms_Utils$.prototype.init___ = (function() {
   return this
 });
-$c_Ltech_windswept_htmlrooms_Utils$.prototype.overlap__Ltech_windswept_htmlrooms_Room__Ltech_windswept_htmlrooms_Room__Z = (function(a, b) {
-  return ((((a.x$1 < ((b.x$1 + b.width$1) | 0)) && (((a.x$1 + a.width$1) | 0) > b.x$1)) && (a.y$1 < ((b.y$1 + b.height$1) | 0))) && (((a.y$1 + a.height$1) | 0) > b.y$1))
-});
 $c_Ltech_windswept_htmlrooms_Utils$.prototype.randomRoom__I__I__Ltech_windswept_htmlrooms_Room = (function(minSize, maxSize) {
   var size = this.randomSize__I__I__I(minSize, maxSize);
   var this$1 = $m_s_util_Random$();
@@ -3430,6 +3427,9 @@ $c_Ltech_windswept_htmlrooms_Utils$.prototype.randomRoom__I__I__Ltech_windswept_
   var jsx$1 = this$7.self$1.nextInt__I__I(5);
   var this$8 = $m_s_util_Random$();
   return new $c_Ltech_windswept_htmlrooms_Room().init___I__I__I__I__Lorg_scalajs_dom_ext_Color((((-2) + ((((((-width) | 0) / 2) | 0) + jsx$1) | 0)) | 0), (((-2) + ((((((-height) | 0) / 2) | 0) + this$8.self$1.nextInt__I__I(5)) | 0)) | 0), width, height, this.randomColor__Lorg_scalajs_dom_ext_Color())
+});
+$c_Ltech_windswept_htmlrooms_Utils$.prototype.overlap__Ltech_windswept_htmlrooms_Room__Ltech_windswept_htmlrooms_Room__Z = (function(a, b) {
+  return ((((a.x$1 < ((b.x$1 + b.width$1) | 0)) && (((a.x$1 + a.width$1) | 0) > b.x$1)) && (a.y$1 < ((b.y$1 + b.height$1) | 0))) && (((a.y$1 + a.height$1) | 0) > b.y$1))
 });
 $c_Ltech_windswept_htmlrooms_Utils$.prototype.randomColor__Lorg_scalajs_dom_ext_Color = (function() {
   var this$1 = $m_s_util_Random$();
@@ -4199,6 +4199,24 @@ function $f_sc_TraversableOnce__foldLeft__O__F2__O($thiz, z, op) {
   })($thiz, op, result)));
   return result.elem$1
 }
+function $f_sc_TraversableOnce__addString__scm_StringBuilder__T__T__T__scm_StringBuilder($thiz, b, start, sep, end) {
+  var first = new $c_sr_BooleanRef().init___Z(true);
+  b.append__T__scm_StringBuilder(start);
+  $thiz.foreach__F1__V(new $c_sjsr_AnonFunction1().init___sjs_js_Function1((function($this, b$1, sep$1, first$1) {
+    return (function(x$2) {
+      if (first$1.elem$1) {
+        b$1.append__O__scm_StringBuilder(x$2);
+        first$1.elem$1 = false;
+        return (void 0)
+      } else {
+        b$1.append__T__scm_StringBuilder(sep$1);
+        return b$1.append__O__scm_StringBuilder(x$2)
+      }
+    })
+  })($thiz, b, sep, first)));
+  b.append__T__scm_StringBuilder(end);
+  return b
+}
 function $f_sc_TraversableOnce__minBy__F1__s_math_Ordering__O($thiz, f, cmp) {
   if ($thiz.isEmpty__Z()) {
     throw new $c_jl_UnsupportedOperationException().init___T("empty.minBy")
@@ -4217,24 +4235,6 @@ function $f_sc_TraversableOnce__minBy__F1__s_math_Ordering__O($thiz, f, cmp) {
     })
   })($thiz, f, cmp, minF, minElem, first)));
   return minElem.elem$1
-}
-function $f_sc_TraversableOnce__addString__scm_StringBuilder__T__T__T__scm_StringBuilder($thiz, b, start, sep, end) {
-  var first = new $c_sr_BooleanRef().init___Z(true);
-  b.append__T__scm_StringBuilder(start);
-  $thiz.foreach__F1__V(new $c_sjsr_AnonFunction1().init___sjs_js_Function1((function($this, b$1, sep$1, first$1) {
-    return (function(x$2) {
-      if (first$1.elem$1) {
-        b$1.append__O__scm_StringBuilder(x$2);
-        first$1.elem$1 = false;
-        return (void 0)
-      } else {
-        b$1.append__T__scm_StringBuilder(sep$1);
-        return b$1.append__O__scm_StringBuilder(x$2)
-      }
-    })
-  })($thiz, b, sep, first)));
-  b.append__T__scm_StringBuilder(end);
-  return b
 }
 function $f_sc_TraversableOnce__nonEmpty__Z($thiz) {
   return (!$thiz.isEmpty__Z())
@@ -5288,6 +5288,38 @@ function $m_Ltech_windswept_htmlrooms_SeparationAlgorithm$() {
   return $n_Ltech_windswept_htmlrooms_SeparationAlgorithm$
 }
 /** @constructor */
+function $c_Ltech_windswept_htmlrooms_TetrisAlgorithm$() {
+  $c_O.call(this)
+}
+$c_Ltech_windswept_htmlrooms_TetrisAlgorithm$.prototype = new $h_O();
+$c_Ltech_windswept_htmlrooms_TetrisAlgorithm$.prototype.constructor = $c_Ltech_windswept_htmlrooms_TetrisAlgorithm$;
+/** @constructor */
+function $h_Ltech_windswept_htmlrooms_TetrisAlgorithm$() {
+  /*<skip>*/
+}
+$h_Ltech_windswept_htmlrooms_TetrisAlgorithm$.prototype = $c_Ltech_windswept_htmlrooms_TetrisAlgorithm$.prototype;
+$c_Ltech_windswept_htmlrooms_TetrisAlgorithm$.prototype.init___ = (function() {
+  return this
+});
+$c_Ltech_windswept_htmlrooms_TetrisAlgorithm$.prototype.init__I__I__I__Ltech_windswept_htmlrooms_TetrisState = (function(numberOfRooms, minSize, maxSize) {
+  return new $c_Ltech_windswept_htmlrooms_TetrisState().init___I__I__I__Ltech_windswept_htmlrooms_Room__Z__I__I__I__I__I__scm_Buffer(numberOfRooms, minSize, maxSize, new $c_Ltech_windswept_htmlrooms_Room().init___I__I__I__I__Lorg_scalajs_dom_ext_Color(0, 0, 0, 0, new $c_Lorg_scalajs_dom_ext_Color().init___I__I__I(0, 0, 0)), false, 0, ((((-maxSize) | 0) / 2) | 0), ((((-maxSize) | 0) / 2) | 0), ((maxSize / 2) | 0), ((maxSize / 2) | 0), $as_scm_Buffer($m_scm_Buffer$().apply__sc_Seq__sc_GenTraversable($m_sci_Nil$())))
+});
+var $d_Ltech_windswept_htmlrooms_TetrisAlgorithm$ = new $TypeData().initClass({
+  Ltech_windswept_htmlrooms_TetrisAlgorithm$: 0
+}, false, "tech.windswept.htmlrooms.TetrisAlgorithm$", {
+  Ltech_windswept_htmlrooms_TetrisAlgorithm$: 1,
+  O: 1,
+  Ltech_windswept_htmlrooms_Algorithm: 1
+});
+$c_Ltech_windswept_htmlrooms_TetrisAlgorithm$.prototype.$classData = $d_Ltech_windswept_htmlrooms_TetrisAlgorithm$;
+var $n_Ltech_windswept_htmlrooms_TetrisAlgorithm$ = (void 0);
+function $m_Ltech_windswept_htmlrooms_TetrisAlgorithm$() {
+  if ((!$n_Ltech_windswept_htmlrooms_TetrisAlgorithm$)) {
+    $n_Ltech_windswept_htmlrooms_TetrisAlgorithm$ = new $c_Ltech_windswept_htmlrooms_TetrisAlgorithm$().init___()
+  };
+  return $n_Ltech_windswept_htmlrooms_TetrisAlgorithm$
+}
+/** @constructor */
 function $c_jl_Number() {
   $c_O.call(this)
 }
@@ -5642,15 +5674,15 @@ function $m_s_util_hashing_MurmurHash3$() {
 function $f_sc_Iterator__isEmpty__Z($thiz) {
   return (!$thiz.hasNext__Z())
 }
+function $f_sc_Iterator__toString__T($thiz) {
+  return (($thiz.hasNext__Z() ? "non-empty" : "empty") + " iterator")
+}
 function $f_sc_Iterator__forall__F1__Z($thiz, p) {
   var res = true;
   while ((res && $thiz.hasNext__Z())) {
     res = $uZ(p.apply__O__O($thiz.next__O()))
   };
   return res
-}
-function $f_sc_Iterator__toString__T($thiz) {
-  return (($thiz.hasNext__Z() ? "non-empty" : "empty") + " iterator")
 }
 function $f_sc_Iterator__foreach__F1__V($thiz, f) {
   while ($thiz.hasNext__Z()) {
@@ -7234,9 +7266,6 @@ $c_s_Predef$.prototype.require__Z__V = (function(requirement) {
   if ((!requirement)) {
     throw new $c_jl_IllegalArgumentException().init___T("requirement failed")
   }
-});
-$c_s_Predef$.prototype.$$qmark$qmark$qmark__sr_Nothing$ = (function() {
-  throw new $c_s_NotImplementedError().init___()
 });
 var $d_s_Predef$ = new $TypeData().initClass({
   s_Predef$: 0
@@ -11072,31 +11101,6 @@ function $m_s_Array$() {
   return $n_s_Array$
 }
 /** @constructor */
-function $c_s_NotImplementedError() {
-  $c_jl_Error.call(this)
-}
-$c_s_NotImplementedError.prototype = new $h_jl_Error();
-$c_s_NotImplementedError.prototype.constructor = $c_s_NotImplementedError;
-/** @constructor */
-function $h_s_NotImplementedError() {
-  /*<skip>*/
-}
-$h_s_NotImplementedError.prototype = $c_s_NotImplementedError.prototype;
-$c_s_NotImplementedError.prototype.init___ = (function() {
-  $c_jl_Throwable.prototype.init___T__jl_Throwable.call(this, "an implementation is missing", null);
-  return this
-});
-var $d_s_NotImplementedError = new $TypeData().initClass({
-  s_NotImplementedError: 0
-}, false, "scala.NotImplementedError", {
-  s_NotImplementedError: 1,
-  jl_Error: 1,
-  jl_Throwable: 1,
-  O: 1,
-  Ljava_io_Serializable: 1
-});
-$c_s_NotImplementedError.prototype.$classData = $d_s_NotImplementedError;
-/** @constructor */
 function $c_s_Predef$$eq$colon$eq() {
   $c_O.call(this)
 }
@@ -11851,13 +11855,13 @@ $c_Ltech_windswept_htmlrooms_Vec2.prototype.productElement__I__O = (function(x$1
     }
   }
 });
-$c_Ltech_windswept_htmlrooms_Vec2.prototype.toString__T = (function() {
-  return $m_sr_ScalaRunTime$().$$undtoString__s_Product__T(this)
-});
 $c_Ltech_windswept_htmlrooms_Vec2.prototype.init___I__I = (function(x, y) {
   this.x$1 = x;
   this.y$1 = y;
   return this
+});
+$c_Ltech_windswept_htmlrooms_Vec2.prototype.toString__T = (function() {
+  return $m_sr_ScalaRunTime$().$$undtoString__s_Product__T(this)
 });
 $c_Ltech_windswept_htmlrooms_Vec2.prototype.hashCode__I = (function() {
   var acc = (-889275714);
@@ -13780,7 +13784,19 @@ var $d_Ltech_windswept_htmlrooms_SeparationState = new $TypeData().initClass({
 $c_Ltech_windswept_htmlrooms_SeparationState.prototype.$classData = $d_Ltech_windswept_htmlrooms_SeparationState;
 /** @constructor */
 function $c_Ltech_windswept_htmlrooms_TetrisState() {
-  $c_O.call(this)
+  $c_O.call(this);
+  this.roomsToPlace$1 = 0;
+  this.minSize$1 = 0;
+  this.maxSize$1 = 0;
+  this.currentRoom$1 = null;
+  this.placementInProgress$1 = false;
+  this.currentDirection$1 = 0;
+  this.leftBound$1 = 0;
+  this.topBound$1 = 0;
+  this.rightBound$1 = 0;
+  this.bottomBound$1 = 0;
+  this.rooms$1 = null;
+  this.directionVectors$1 = null
 }
 $c_Ltech_windswept_htmlrooms_TetrisState.prototype = new $h_O();
 $c_Ltech_windswept_htmlrooms_TetrisState.prototype.constructor = $c_Ltech_windswept_htmlrooms_TetrisState;
@@ -13789,36 +13805,235 @@ function $h_Ltech_windswept_htmlrooms_TetrisState() {
   /*<skip>*/
 }
 $h_Ltech_windswept_htmlrooms_TetrisState.prototype = $c_Ltech_windswept_htmlrooms_TetrisState.prototype;
-$c_Ltech_windswept_htmlrooms_TetrisState.prototype.init___ = (function() {
-  return this
-});
 $c_Ltech_windswept_htmlrooms_TetrisState.prototype.productPrefix__T = (function() {
   return "TetrisState"
 });
 $c_Ltech_windswept_htmlrooms_TetrisState.prototype.productArity__I = (function() {
-  return 0
+  return 11
 });
 $c_Ltech_windswept_htmlrooms_TetrisState.prototype.equals__O__Z = (function(x$1) {
-  return ($is_Ltech_windswept_htmlrooms_TetrisState(x$1) && ($as_Ltech_windswept_htmlrooms_TetrisState(x$1), true))
+  if ((this === x$1)) {
+    return true
+  } else if ($is_Ltech_windswept_htmlrooms_TetrisState(x$1)) {
+    var TetrisState$1 = $as_Ltech_windswept_htmlrooms_TetrisState(x$1);
+    if ((((this.roomsToPlace$1 === TetrisState$1.roomsToPlace$1) && (this.minSize$1 === TetrisState$1.minSize$1)) && (this.maxSize$1 === TetrisState$1.maxSize$1))) {
+      var x = this.currentRoom$1;
+      var x$2 = TetrisState$1.currentRoom$1;
+      var jsx$1 = ((x === null) ? (x$2 === null) : x.equals__O__Z(x$2))
+    } else {
+      var jsx$1 = false
+    };
+    if (((((((jsx$1 && (this.placementInProgress$1 === TetrisState$1.placementInProgress$1)) && (this.currentDirection$1 === TetrisState$1.currentDirection$1)) && (this.leftBound$1 === TetrisState$1.leftBound$1)) && (this.topBound$1 === TetrisState$1.topBound$1)) && (this.rightBound$1 === TetrisState$1.rightBound$1)) && (this.bottomBound$1 === TetrisState$1.bottomBound$1))) {
+      var x$3 = this.rooms$1;
+      var x$4 = TetrisState$1.rooms$1;
+      return ((x$3 === null) ? (x$4 === null) : x$3.equals__O__Z(x$4))
+    } else {
+      return false
+    }
+  } else {
+    return false
+  }
 });
 $c_Ltech_windswept_htmlrooms_TetrisState.prototype.productElement__I__O = (function(x$1) {
-  throw new $c_jl_IndexOutOfBoundsException().init___T(("" + x$1))
+  switch (x$1) {
+    case 0: {
+      return this.roomsToPlace$1;
+      break
+    }
+    case 1: {
+      return this.minSize$1;
+      break
+    }
+    case 2: {
+      return this.maxSize$1;
+      break
+    }
+    case 3: {
+      return this.currentRoom$1;
+      break
+    }
+    case 4: {
+      return this.placementInProgress$1;
+      break
+    }
+    case 5: {
+      return this.currentDirection$1;
+      break
+    }
+    case 6: {
+      return this.leftBound$1;
+      break
+    }
+    case 7: {
+      return this.topBound$1;
+      break
+    }
+    case 8: {
+      return this.rightBound$1;
+      break
+    }
+    case 9: {
+      return this.bottomBound$1;
+      break
+    }
+    case 10: {
+      return this.rooms$1;
+      break
+    }
+    default: {
+      throw new $c_jl_IndexOutOfBoundsException().init___T(("" + x$1))
+    }
+  }
 });
 $c_Ltech_windswept_htmlrooms_TetrisState.prototype.toString__T = (function() {
   return $m_sr_ScalaRunTime$().$$undtoString__s_Product__T(this)
 });
+$c_Ltech_windswept_htmlrooms_TetrisState.prototype.updateBounds__V = (function() {
+  var xMin = new $c_sr_IntRef().init___I(2147483647);
+  var xMax = new $c_sr_IntRef().init___I((-2147483648));
+  var yMin = new $c_sr_IntRef().init___I(2147483647);
+  var yMax = new $c_sr_IntRef().init___I((-2147483648));
+  this.rooms$1.foreach__F1__V(new $c_sjsr_AnonFunction1().init___sjs_js_Function1((function($this, xMin$1, xMax$1, yMin$1, yMax$1) {
+    return (function(r$2) {
+      var r = $as_Ltech_windswept_htmlrooms_Room(r$2);
+      var a = xMin$1.elem$1;
+      var b = r.x$1;
+      xMin$1.elem$1 = ((a < b) ? a : b);
+      var a$1 = xMax$1.elem$1;
+      var b$1 = ((r.x$1 + r.width$1) | 0);
+      xMax$1.elem$1 = ((a$1 > b$1) ? a$1 : b$1);
+      var a$2 = yMin$1.elem$1;
+      var b$2 = r.y$1;
+      yMin$1.elem$1 = ((a$2 < b$2) ? a$2 : b$2);
+      var a$3 = yMax$1.elem$1;
+      var b$3 = ((r.y$1 + r.height$1) | 0);
+      yMax$1.elem$1 = ((a$3 > b$3) ? a$3 : b$3)
+    })
+  })(this, xMin, xMax, yMin, yMax)));
+  this.leftBound$1 = ((xMin.elem$1 - this.maxSize$1) | 0);
+  this.rightBound$1 = ((xMax.elem$1 + this.maxSize$1) | 0);
+  this.topBound$1 = ((yMin.elem$1 - this.maxSize$1) | 0);
+  this.bottomBound$1 = ((yMax.elem$1 + this.maxSize$1) | 0)
+});
+$c_Ltech_windswept_htmlrooms_TetrisState.prototype.init___I__I__I__Ltech_windswept_htmlrooms_Room__Z__I__I__I__I__I__scm_Buffer = (function(roomsToPlace, minSize, maxSize, currentRoom, placementInProgress, currentDirection, leftBound, topBound, rightBound, bottomBound, rooms) {
+  this.roomsToPlace$1 = roomsToPlace;
+  this.minSize$1 = minSize;
+  this.maxSize$1 = maxSize;
+  this.currentRoom$1 = currentRoom;
+  this.placementInProgress$1 = placementInProgress;
+  this.currentDirection$1 = currentDirection;
+  this.leftBound$1 = leftBound;
+  this.topBound$1 = topBound;
+  this.rightBound$1 = rightBound;
+  this.bottomBound$1 = bottomBound;
+  this.rooms$1 = rooms;
+  var xs = new $c_sjs_js_WrappedArray().init___sjs_js_Array([new $c_Ltech_windswept_htmlrooms_Vec2().init___I__I((-1), 0), new $c_Ltech_windswept_htmlrooms_Vec2().init___I__I(0, (-1)), new $c_Ltech_windswept_htmlrooms_Vec2().init___I__I(1, 0), new $c_Ltech_windswept_htmlrooms_Vec2().init___I__I(0, 1)]);
+  var len = $uI(xs.array$6.length);
+  var array = $newArrayObject($d_Ltech_windswept_htmlrooms_Vec2.getArrayOf(), [len]);
+  var elem$1 = 0;
+  elem$1 = 0;
+  var this$4 = new $c_sc_IndexedSeqLike$Elements().init___sc_IndexedSeqLike__I__I(xs, 0, $uI(xs.array$6.length));
+  while (this$4.hasNext__Z()) {
+    var arg1 = this$4.next__O();
+    array.set(elem$1, arg1);
+    elem$1 = ((1 + elem$1) | 0)
+  };
+  this.directionVectors$1 = array;
+  return this
+});
+$c_Ltech_windswept_htmlrooms_TetrisState.prototype.randomRoom__I__I__Ltech_windswept_htmlrooms_Room = (function(minSize, maxSize) {
+  var size = $m_Ltech_windswept_htmlrooms_Utils$().randomSize__I__I__I(minSize, maxSize);
+  var this$1 = $m_s_util_Random$();
+  var b = (((-2) + ((size + this$1.self$1.nextInt__I__I(5)) | 0)) | 0);
+  var b$1 = ((maxSize < b) ? maxSize : b);
+  var width = ((minSize > b$1) ? minSize : b$1);
+  var this$4 = $m_s_util_Random$();
+  var b$2 = (((-2) + ((size + this$4.self$1.nextInt__I__I(5)) | 0)) | 0);
+  var b$3 = ((maxSize < b$2) ? maxSize : b$2);
+  var height = ((minSize > b$3) ? minSize : b$3);
+  if (((this.currentDirection$1 === 1) || (this.currentDirection$1 === 3))) {
+    var horizontalSlack = ((((this.rightBound$1 - this.leftBound$1) | 0) - width) | 0);
+    var jsx$1 = this.leftBound$1;
+    var this$8 = $m_s_util_Random$();
+    var n = ((horizontalSlack > 1) ? horizontalSlack : 1);
+    return new $c_Ltech_windswept_htmlrooms_Room().init___I__I__I__I__Lorg_scalajs_dom_ext_Color(((jsx$1 + this$8.self$1.nextInt__I__I(n)) | 0), ((((-height) | 0) / 2) | 0), width, height, $m_Ltech_windswept_htmlrooms_Utils$().randomColor__Lorg_scalajs_dom_ext_Color())
+  } else {
+    var verticalSlack = ((((this.bottomBound$1 - this.topBound$1) | 0) - height) | 0);
+    var jsx$2 = this.topBound$1;
+    var this$10 = $m_s_util_Random$();
+    var n$1 = ((verticalSlack > 1) ? verticalSlack : 1);
+    return new $c_Ltech_windswept_htmlrooms_Room().init___I__I__I__I__Lorg_scalajs_dom_ext_Color(((((-width) | 0) / 2) | 0), ((jsx$2 + this$10.self$1.nextInt__I__I(n$1)) | 0), width, height, $m_Ltech_windswept_htmlrooms_Utils$().randomColor__Lorg_scalajs_dom_ext_Color())
+  }
+});
 $c_Ltech_windswept_htmlrooms_TetrisState.prototype.nextStep__Z = (function() {
-  $m_s_Predef$().$$qmark$qmark$qmark__sr_Nothing$()
+  if ((this.roomsToPlace$1 === 0)) {
+    return true
+  } else if (this.placementInProgress$1) {
+    if (this.validPlacement__Ltech_windswept_htmlrooms_Room__Z(this.currentRoom$1)) {
+      this.placementInProgress$1 = false;
+      var this$1 = this.rooms$1;
+      var elems = new $c_sjs_js_WrappedArray().init___sjs_js_Array([this.currentRoom$1]);
+      this$1.$$plus$plus$eq__sc_TraversableOnce__scg_Growable(elems);
+      this.updateBounds__V();
+      this.currentDirection$1 = ((((1 + this.currentDirection$1) | 0) % 4) | 0)
+    } else {
+      var ev$1 = this.currentRoom$1;
+      ev$1.x$1 = ((ev$1.x$1 + this.directionVectors$1.get(this.currentDirection$1).x$1) | 0);
+      var ev$2 = this.currentRoom$1;
+      ev$2.y$1 = ((ev$2.y$1 + this.directionVectors$1.get(this.currentDirection$1).y$1) | 0)
+    };
+    return false
+  } else {
+    this.roomsToPlace$1 = (((-1) + this.roomsToPlace$1) | 0);
+    this.currentRoom$1 = this.randomRoom__I__I__Ltech_windswept_htmlrooms_Room(this.minSize$1, this.maxSize$1);
+    this.placementInProgress$1 = true;
+    return false
+  }
+});
+$c_Ltech_windswept_htmlrooms_TetrisState.prototype.validPlacement__Ltech_windswept_htmlrooms_Room__Z = (function(room) {
+  return (!this.rooms$1.exists__F1__Z(new $c_sjsr_AnonFunction1().init___sjs_js_Function1((function($this, room$1) {
+    return (function(fixedRoom$2) {
+      var fixedRoom = $as_Ltech_windswept_htmlrooms_Room(fixedRoom$2);
+      return $m_Ltech_windswept_htmlrooms_Utils$().overlap__Ltech_windswept_htmlrooms_Room__Ltech_windswept_htmlrooms_Room__Z(room$1, fixedRoom)
+    })
+  })(this, room))))
 });
 $c_Ltech_windswept_htmlrooms_TetrisState.prototype.hashCode__I = (function() {
-  var this$2 = $m_s_util_hashing_MurmurHash3$();
-  return this$2.productHash__s_Product__I__I(this, (-889275714))
+  var acc = (-889275714);
+  acc = $m_sr_Statics$().mix__I__I__I(acc, this.roomsToPlace$1);
+  acc = $m_sr_Statics$().mix__I__I__I(acc, this.minSize$1);
+  acc = $m_sr_Statics$().mix__I__I__I(acc, this.maxSize$1);
+  acc = $m_sr_Statics$().mix__I__I__I(acc, $m_sr_Statics$().anyHash__O__I(this.currentRoom$1));
+  acc = $m_sr_Statics$().mix__I__I__I(acc, (this.placementInProgress$1 ? 1231 : 1237));
+  acc = $m_sr_Statics$().mix__I__I__I(acc, this.currentDirection$1);
+  acc = $m_sr_Statics$().mix__I__I__I(acc, this.leftBound$1);
+  acc = $m_sr_Statics$().mix__I__I__I(acc, this.topBound$1);
+  acc = $m_sr_Statics$().mix__I__I__I(acc, this.rightBound$1);
+  acc = $m_sr_Statics$().mix__I__I__I(acc, this.bottomBound$1);
+  acc = $m_sr_Statics$().mix__I__I__I(acc, $m_sr_Statics$().anyHash__O__I(this.rooms$1));
+  return $m_sr_Statics$().finalizeHash__I__I__I(acc, 11)
 });
 $c_Ltech_windswept_htmlrooms_TetrisState.prototype.productIterator__sc_Iterator = (function() {
   return new $c_sr_ScalaRunTime$$anon$1().init___s_Product(this)
 });
 $c_Ltech_windswept_htmlrooms_TetrisState.prototype.drawState__Lorg_scalajs_dom_raw_CanvasRenderingContext2D__V = (function(rc) {
-  $m_s_Predef$().$$qmark$qmark$qmark__sr_Nothing$()
+  rc.lineWidth = 0.2;
+  rc.strokeStyle = "black";
+  this.rooms$1.foreach__F1__V(new $c_sjsr_AnonFunction1().init___sjs_js_Function1((function($this, rc$1) {
+    return (function(room$2) {
+      var room = $as_Ltech_windswept_htmlrooms_Room(room$2);
+      var s = room.color$1.toHex__T();
+      rc$1.fillStyle = s;
+      rc$1.fillRect(room.x$1, room.y$1, room.width$1, room.height$1);
+      rc$1.strokeRect(room.x$1, room.y$1, room.width$1, room.height$1)
+    })
+  })(this, rc)));
+  if ((this.roomsToPlace$1 !== 0)) {
+    var s$1 = this.currentRoom$1.color$1.toHex__T();
+    rc.fillStyle = s$1;
+    rc.fillRect(this.currentRoom$1.x$1, this.currentRoom$1.y$1, this.currentRoom$1.width$1, this.currentRoom$1.height$1);
+    rc.strokeRect(this.currentRoom$1.x$1, this.currentRoom$1.y$1, this.currentRoom$1.width$1, this.currentRoom$1.height$1)
+  }
 });
 function $is_Ltech_windswept_htmlrooms_TetrisState(obj) {
   return (!(!((obj && obj.$classData) && obj.$classData.ancestors.Ltech_windswept_htmlrooms_TetrisState)))
@@ -17928,11 +18143,11 @@ $c_sc_AbstractTraversable.prototype.toSet__sci_Set = (function() {
   var cbf = new $c_scg_GenSetFactory$$anon$1().init___scg_GenSetFactory(this$1);
   return $as_sci_Set($f_sc_TraversableLike__to__scg_CanBuildFrom__O(this, cbf))
 });
-$c_sc_AbstractTraversable.prototype.$$div$colon__O__F2__O = (function(z, op) {
-  return this.foldLeft__O__F2__O(z, op)
-});
 $c_sc_AbstractTraversable.prototype.repr__O = (function() {
   return this
+});
+$c_sc_AbstractTraversable.prototype.$$div$colon__O__F2__O = (function(z, op) {
+  return this.foldLeft__O__F2__O(z, op)
 });
 $c_sc_AbstractTraversable.prototype.map__F1__scg_CanBuildFrom__O = (function(f, bf) {
   return $f_sc_TraversableLike__map__F1__scg_CanBuildFrom__O(this, f, bf)
@@ -18082,9 +18297,6 @@ function $asArrayOf_sc_LinearSeqLike(obj, depth) {
 function $f_sc_IndexedSeqOptimized__lengthCompare__I__I($thiz, len) {
   return (($thiz.length__I() - len) | 0)
 }
-function $f_sc_IndexedSeqOptimized__exists__F1__Z($thiz, p) {
-  return ($f_sc_IndexedSeqOptimized__prefixLengthImpl__psc_IndexedSeqOptimized__F1__Z__I($thiz, p, false) !== $thiz.length__I())
-}
 function $f_sc_IndexedSeqOptimized__sameElements__sc_GenIterable__Z($thiz, that) {
   if ($is_sc_IndexedSeq(that)) {
     var x2 = $as_sc_IndexedSeq(that);
@@ -18101,6 +18313,9 @@ function $f_sc_IndexedSeqOptimized__sameElements__sc_GenIterable__Z($thiz, that)
   } else {
     return $f_sc_IterableLike__sameElements__sc_GenIterable__Z($thiz, that)
   }
+}
+function $f_sc_IndexedSeqOptimized__exists__F1__Z($thiz, p) {
+  return ($f_sc_IndexedSeqOptimized__prefixLengthImpl__psc_IndexedSeqOptimized__F1__Z__I($thiz, p, false) !== $thiz.length__I())
 }
 function $f_sc_IndexedSeqOptimized__isEmpty__Z($thiz) {
   return ($thiz.length__I() === 0)
@@ -18559,11 +18774,11 @@ $h_sc_AbstractSeq.prototype = $c_sc_AbstractSeq.prototype;
 $c_sc_AbstractSeq.prototype.lengthCompare__I__I = (function(len) {
   return $f_sc_SeqLike__lengthCompare__I__I(this, len)
 });
-$c_sc_AbstractSeq.prototype.isEmpty__Z = (function() {
-  return $f_sc_SeqLike__isEmpty__Z(this)
-});
 $c_sc_AbstractSeq.prototype.equals__O__Z = (function(that) {
   return $f_sc_GenSeqLike__equals__O__Z(this, that)
+});
+$c_sc_AbstractSeq.prototype.isEmpty__Z = (function() {
+  return $f_sc_SeqLike__isEmpty__Z(this)
 });
 $c_sc_AbstractSeq.prototype.toString__T = (function() {
   return $f_sc_TraversableLike__toString__T(this)
@@ -18737,11 +18952,11 @@ $c_sci_ListSet.prototype.isEmpty__Z = (function() {
 $c_sci_ListSet.prototype.thisCollection__sc_Traversable = (function() {
   return this
 });
-$c_sci_ListSet.prototype.$$plus__O__sci_ListSet = (function(elem) {
-  return new $c_sci_ListSet$Node().init___sci_ListSet__O(this, elem)
-});
 $c_sci_ListSet.prototype.companion__scg_GenericCompanion = (function() {
   return $m_sci_ListSet$()
+});
+$c_sci_ListSet.prototype.$$plus__O__sci_ListSet = (function(elem) {
+  return new $c_sci_ListSet$Node().init___sci_ListSet__O(this, elem)
 });
 $c_sci_ListSet.prototype.size__I = (function() {
   return 0
@@ -18764,11 +18979,11 @@ $c_sci_ListSet.prototype.reverseList$1__p4__sci_List = (function() {
   };
   return res
 });
-$c_sci_ListSet.prototype.elem__O = (function() {
-  throw new $c_ju_NoSuchElementException().init___T("elem of empty set")
-});
 $c_sci_ListSet.prototype.contains__O__Z = (function(elem) {
   return false
+});
+$c_sci_ListSet.prototype.elem__O = (function() {
+  throw new $c_ju_NoSuchElementException().init___T("elem of empty set")
 });
 $c_sci_ListSet.prototype.$$plus$plus__sc_GenTraversableOnce__sci_ListSet = (function(xs) {
   return (xs.isEmpty__Z() ? this : $as_sci_ListSet(xs.$$div$colon__O__F2__O(this, new $c_sjsr_AnonFunction2().init___sjs_js_Function2((function($this) {
@@ -19285,11 +19500,11 @@ $h_sci_HashSet.prototype = $c_sci_HashSet.prototype;
 $c_sci_HashSet.prototype.updated0__O__I__I__sci_HashSet = (function(key, hash, level) {
   return new $c_sci_HashSet$HashSet1().init___O__I(key, hash)
 });
-$c_sci_HashSet.prototype.seq__sc_TraversableOnce = (function() {
-  return this
-});
 $c_sci_HashSet.prototype.computeHash__O__I = (function(key) {
   return this.improve__I__I($m_sr_Statics$().anyHash__O__I(key))
+});
+$c_sci_HashSet.prototype.seq__sc_TraversableOnce = (function() {
+  return this
 });
 $c_sci_HashSet.prototype.init___ = (function() {
   return this
@@ -19503,11 +19718,11 @@ $c_sci_ListSet$Node.prototype.init___sci_ListSet__O = (function($$outer, elem) {
   };
   return this
 });
-$c_sci_ListSet$Node.prototype.contains__O__Z = (function(e) {
-  return this.containsInternal__p5__sci_ListSet__O__Z(this, e)
-});
 $c_sci_ListSet$Node.prototype.elem__O = (function() {
   return this.elem$5
+});
+$c_sci_ListSet$Node.prototype.contains__O__Z = (function(e) {
+  return this.containsInternal__p5__sci_ListSet__O__Z(this, e)
 });
 $c_sci_ListSet$Node.prototype.containsInternal__p5__sci_ListSet__O__Z = (function(n, e) {
   _containsInternal: while (true) {
@@ -20292,6 +20507,9 @@ $c_sci_Map$Map4.prototype.iterator__sc_Iterator = (function() {
   var elems = new $c_sjs_js_WrappedArray().init___sjs_js_Array([new $c_T2().init___O__O(this.key1$5, this.value1$5), new $c_T2().init___O__O(this.key2$5, this.value2$5), new $c_T2().init___O__O(this.key3$5, this.value3$5), new $c_T2().init___O__O(this.key4$5, this.value4$5)]);
   return new $c_sc_IndexedSeqLike$Elements().init___sc_IndexedSeqLike__I__I(elems, 0, $uI(elems.array$6.length))
 });
+$c_sci_Map$Map4.prototype.updated__O__O__sci_Map = (function(key, value) {
+  return ($m_sr_BoxesRunTime$().equals__O__O__Z(key, this.key1$5) ? new $c_sci_Map$Map4().init___O__O__O__O__O__O__O__O(this.key1$5, value, this.key2$5, this.value2$5, this.key3$5, this.value3$5, this.key4$5, this.value4$5) : ($m_sr_BoxesRunTime$().equals__O__O__Z(key, this.key2$5) ? new $c_sci_Map$Map4().init___O__O__O__O__O__O__O__O(this.key1$5, this.value1$5, this.key2$5, value, this.key3$5, this.value3$5, this.key4$5, this.value4$5) : ($m_sr_BoxesRunTime$().equals__O__O__Z(key, this.key3$5) ? new $c_sci_Map$Map4().init___O__O__O__O__O__O__O__O(this.key1$5, this.value1$5, this.key2$5, this.value2$5, this.key3$5, value, this.key4$5, this.value4$5) : ($m_sr_BoxesRunTime$().equals__O__O__Z(key, this.key4$5) ? new $c_sci_Map$Map4().init___O__O__O__O__O__O__O__O(this.key1$5, this.value1$5, this.key2$5, this.value2$5, this.key3$5, this.value3$5, this.key4$5, value) : new $c_sci_HashMap().init___().updated__O__O__sci_HashMap(this.key1$5, this.value1$5).updated__O__O__sci_HashMap(this.key2$5, this.value2$5).updated__O__O__sci_HashMap(this.key3$5, this.value3$5).updated__O__O__sci_HashMap(this.key4$5, this.value4$5).updated__O__O__sci_HashMap(key, value)))))
+});
 $c_sci_Map$Map4.prototype.init___O__O__O__O__O__O__O__O = (function(key1, value1, key2, value2, key3, value3, key4, value4) {
   this.key1$5 = key1;
   this.value1$5 = value1;
@@ -20302,9 +20520,6 @@ $c_sci_Map$Map4.prototype.init___O__O__O__O__O__O__O__O = (function(key1, value1
   this.key4$5 = key4;
   this.value4$5 = value4;
   return this
-});
-$c_sci_Map$Map4.prototype.updated__O__O__sci_Map = (function(key, value) {
-  return ($m_sr_BoxesRunTime$().equals__O__O__Z(key, this.key1$5) ? new $c_sci_Map$Map4().init___O__O__O__O__O__O__O__O(this.key1$5, value, this.key2$5, this.value2$5, this.key3$5, this.value3$5, this.key4$5, this.value4$5) : ($m_sr_BoxesRunTime$().equals__O__O__Z(key, this.key2$5) ? new $c_sci_Map$Map4().init___O__O__O__O__O__O__O__O(this.key1$5, this.value1$5, this.key2$5, value, this.key3$5, this.value3$5, this.key4$5, this.value4$5) : ($m_sr_BoxesRunTime$().equals__O__O__Z(key, this.key3$5) ? new $c_sci_Map$Map4().init___O__O__O__O__O__O__O__O(this.key1$5, this.value1$5, this.key2$5, this.value2$5, this.key3$5, value, this.key4$5, this.value4$5) : ($m_sr_BoxesRunTime$().equals__O__O__Z(key, this.key4$5) ? new $c_sci_Map$Map4().init___O__O__O__O__O__O__O__O(this.key1$5, this.value1$5, this.key2$5, this.value2$5, this.key3$5, this.value3$5, this.key4$5, value) : new $c_sci_HashMap().init___().updated__O__O__sci_HashMap(this.key1$5, this.value1$5).updated__O__O__sci_HashMap(this.key2$5, this.value2$5).updated__O__O__sci_HashMap(this.key3$5, this.value3$5).updated__O__O__sci_HashMap(this.key4$5, this.value4$5).updated__O__O__sci_HashMap(key, value)))))
 });
 $c_sci_Map$Map4.prototype.get__O__s_Option = (function(key) {
   return ($m_sr_BoxesRunTime$().equals__O__O__Z(key, this.key1$5) ? new $c_s_Some().init___O(this.value1$5) : ($m_sr_BoxesRunTime$().equals__O__O__Z(key, this.key2$5) ? new $c_s_Some().init___O(this.value2$5) : ($m_sr_BoxesRunTime$().equals__O__O__Z(key, this.key3$5) ? new $c_s_Some().init___O(this.value3$5) : ($m_sr_BoxesRunTime$().equals__O__O__Z(key, this.key4$5) ? new $c_s_Some().init___O(this.value4$5) : $m_s_None$()))))
@@ -20624,21 +20839,21 @@ $c_sci_HashSet$HashSet1.prototype.updated0__O__I__I__sci_HashSet = (function(key
     return new $c_sci_HashSet$HashSetCollision1().init___I__sci_ListSet(hash, new $c_sci_ListSet$Node().init___sci_ListSet__O(this$2, elem).$$plus__O__sci_ListSet(key))
   }
 });
-$c_sci_HashSet$HashSet1.prototype.foreach__F1__V = (function(f) {
-  f.apply__O__O(this.key$6)
-});
 $c_sci_HashSet$HashSet1.prototype.init___O__I = (function(key, hash) {
   this.key$6 = key;
   this.hash$6 = hash;
   return this
 });
-$c_sci_HashSet$HashSet1.prototype.size__I = (function() {
-  return 1
+$c_sci_HashSet$HashSet1.prototype.foreach__F1__V = (function(f) {
+  f.apply__O__O(this.key$6)
 });
 $c_sci_HashSet$HashSet1.prototype.iterator__sc_Iterator = (function() {
   $m_sc_Iterator$();
   var elems = new $c_sjs_js_WrappedArray().init___sjs_js_Array([this.key$6]);
   return new $c_sc_IndexedSeqLike$Elements().init___sc_IndexedSeqLike__I__I(elems, 0, $uI(elems.array$6.length))
+});
+$c_sci_HashSet$HashSet1.prototype.size__I = (function() {
+  return 1
 });
 $c_sci_HashSet$HashSet1.prototype.get0__O__I__I__Z = (function(key, hash, level) {
   return ((hash === this.hash$6) && $m_sr_BoxesRunTime$().equals__O__O__Z(key, this.key$6))
@@ -21124,6 +21339,9 @@ $c_sci_Range.prototype.apply__O__O = (function(v1) {
 $c_sci_Range.prototype.isEmpty__Z = (function() {
   return this.isEmpty$4
 });
+$c_sci_Range.prototype.thisCollection__sc_Traversable = (function() {
+  return this
+});
 $c_sci_Range.prototype.longLength__p4__J = (function() {
   var t = this.gap__p4__J();
   var lo = t.lo$2;
@@ -21138,9 +21356,6 @@ $c_sci_Range.prototype.longLength__p4__J = (function() {
   var lo$2 = ((lo$1 + value$1) | 0);
   var hi$4 = ((((-2147483648) ^ lo$2) < ((-2147483648) ^ lo$1)) ? ((1 + ((hi$2 + hi$3) | 0)) | 0) : ((hi$2 + hi$3) | 0));
   return new $c_sjsr_RuntimeLong().init___I__I(lo$2, hi$4)
-});
-$c_sci_Range.prototype.thisCollection__sc_Traversable = (function() {
-  return this
 });
 $c_sci_Range.prototype.equals__O__Z = (function(other) {
   if ($is_sci_Range(other)) {
@@ -21204,14 +21419,14 @@ $c_sci_Range.prototype.init___I__I__I = (function(start, end, step) {
   this.scala$collection$immutable$Range$$lastElement$4 = jsx$2;
   return this
 });
-$c_sci_Range.prototype.companion__scg_GenericCompanion = (function() {
-  return $m_sci_IndexedSeq$()
-});
 $c_sci_Range.prototype.toString__T = (function() {
   var preposition = (this.isInclusive__Z() ? "to" : "until");
   var stepped = ((this.step$4 === 1) ? "" : new $c_s_StringContext().init___sc_Seq(new $c_sjs_js_WrappedArray().init___sjs_js_Array([" by ", ""])).s__sc_Seq__T(new $c_sjs_js_WrappedArray().init___sjs_js_Array([this.step$4])));
   var prefix = (this.isEmpty$4 ? "empty " : ((!this.isExact__p4__Z()) ? "inexact " : ""));
   return new $c_s_StringContext().init___sc_Seq(new $c_sjs_js_WrappedArray().init___sjs_js_Array(["", "Range ", " ", " ", "", ""])).s__sc_Seq__T(new $c_sjs_js_WrappedArray().init___sjs_js_Array([prefix, this.start$4, preposition, this.end$4, stepped]))
+});
+$c_sci_Range.prototype.companion__scg_GenericCompanion = (function() {
+  return $m_sci_IndexedSeq$()
 });
 $c_sci_Range.prototype.foreach__F1__V = (function(f) {
   if ((!this.isEmpty$4)) {
@@ -21236,11 +21451,11 @@ $c_sci_Range.prototype.scala$collection$immutable$Range$$validateMaxLength__V = 
     $m_sci_Range$().scala$collection$immutable$Range$$fail__I__I__I__Z__sr_Nothing$(this.start$4, this.end$4, this.step$4, this.isInclusive__Z())
   }
 });
-$c_sci_Range.prototype.length__I = (function() {
-  return ((this.scala$collection$immutable$Range$$numRangeElements$4 < 0) ? $m_sci_Range$().scala$collection$immutable$Range$$fail__I__I__I__Z__sr_Nothing$(this.start$4, this.end$4, this.step$4, this.isInclusive__Z()) : this.scala$collection$immutable$Range$$numRangeElements$4)
-});
 $c_sci_Range.prototype.seq__sc_Seq = (function() {
   return this
+});
+$c_sci_Range.prototype.length__I = (function() {
+  return ((this.scala$collection$immutable$Range$$numRangeElements$4 < 0) ? $m_sci_Range$().scala$collection$immutable$Range$$fail__I__I__I__Z__sr_Nothing$(this.start$4, this.end$4, this.step$4, this.isInclusive__Z()) : this.scala$collection$immutable$Range$$numRangeElements$4)
 });
 $c_sci_Range.prototype.sizeHintIfCheap__I = (function() {
   return this.length__I()
@@ -21795,13 +22010,13 @@ $c_sci_HashMap$HashMap1.prototype.get0__O__I__I__s_Option = (function(key, hash,
 $c_sci_HashMap$HashMap1.prototype.foreach__F1__V = (function(f) {
   f.apply__O__O(this.ensurePair__T2())
 });
-$c_sci_HashMap$HashMap1.prototype.size__I = (function() {
-  return 1
-});
 $c_sci_HashMap$HashMap1.prototype.iterator__sc_Iterator = (function() {
   $m_sc_Iterator$();
   var elems = new $c_sjs_js_WrappedArray().init___sjs_js_Array([this.ensurePair__T2()]);
   return new $c_sc_IndexedSeqLike$Elements().init___sc_IndexedSeqLike__I__I(elems, 0, $uI(elems.array$6.length))
+});
+$c_sci_HashMap$HashMap1.prototype.size__I = (function() {
+  return 1
 });
 function $is_sci_HashMap$HashMap1(obj) {
   return (!(!((obj && obj.$classData) && obj.$classData.ancestors.sci_HashMap$HashMap1)))
@@ -22614,14 +22829,14 @@ $c_sci_WrappedString.prototype.apply__I__O = (function(idx) {
 $c_sci_WrappedString.prototype.lengthCompare__I__I = (function(len) {
   return $f_sc_IndexedSeqOptimized__lengthCompare__I__I(this, len)
 });
-$c_sci_WrappedString.prototype.sameElements__sc_GenIterable__Z = (function(that) {
-  return $f_sc_IndexedSeqOptimized__sameElements__sc_GenIterable__Z(this, that)
-});
 $c_sci_WrappedString.prototype.apply__O__O = (function(v1) {
   var n = $uI(v1);
   var thiz = this.self$4;
   var c = (65535 & $uI(thiz.charCodeAt(n)));
   return new $c_jl_Character().init___C(c)
+});
+$c_sci_WrappedString.prototype.sameElements__sc_GenIterable__Z = (function(that) {
+  return $f_sc_IndexedSeqOptimized__sameElements__sc_GenIterable__Z(this, that)
 });
 $c_sci_WrappedString.prototype.isEmpty__Z = (function() {
   return $f_sc_IndexedSeqOptimized__isEmpty__Z(this)
@@ -22629,11 +22844,11 @@ $c_sci_WrappedString.prototype.isEmpty__Z = (function() {
 $c_sci_WrappedString.prototype.thisCollection__sc_Traversable = (function() {
   return this
 });
-$c_sci_WrappedString.prototype.toString__T = (function() {
-  return this.self$4
-});
 $c_sci_WrappedString.prototype.companion__scg_GenericCompanion = (function() {
   return $m_sci_IndexedSeq$()
+});
+$c_sci_WrappedString.prototype.toString__T = (function() {
+  return this.self$4
 });
 $c_sci_WrappedString.prototype.foreach__F1__V = (function(f) {
   $f_sc_IndexedSeqOptimized__foreach__F1__V(this, f)
@@ -22733,20 +22948,20 @@ function $h_sci_$colon$colon() {
   /*<skip>*/
 }
 $h_sci_$colon$colon.prototype = $c_sci_$colon$colon.prototype;
-$c_sci_$colon$colon.prototype.productPrefix__T = (function() {
-  return "::"
-});
 $c_sci_$colon$colon.prototype.head__O = (function() {
   return this.head$5
+});
+$c_sci_$colon$colon.prototype.productPrefix__T = (function() {
+  return "::"
 });
 $c_sci_$colon$colon.prototype.productArity__I = (function() {
   return 2
 });
-$c_sci_$colon$colon.prototype.isEmpty__Z = (function() {
-  return false
-});
 $c_sci_$colon$colon.prototype.tail__sci_List = (function() {
   return this.tl$5
+});
+$c_sci_$colon$colon.prototype.isEmpty__Z = (function() {
+  return false
 });
 $c_sci_$colon$colon.prototype.productElement__I__O = (function(x$1) {
   switch (x$1) {
@@ -22840,23 +23055,23 @@ function $h_sci_Nil$() {
   /*<skip>*/
 }
 $h_sci_Nil$.prototype = $c_sci_Nil$.prototype;
-$c_sci_Nil$.prototype.init___ = (function() {
-  return this
+$c_sci_Nil$.prototype.productPrefix__T = (function() {
+  return "Nil"
 });
 $c_sci_Nil$.prototype.head__O = (function() {
   this.head__sr_Nothing$()
 });
-$c_sci_Nil$.prototype.productPrefix__T = (function() {
-  return "Nil"
+$c_sci_Nil$.prototype.init___ = (function() {
+  return this
 });
 $c_sci_Nil$.prototype.productArity__I = (function() {
   return 0
 });
-$c_sci_Nil$.prototype.tail__sci_List = (function() {
-  throw new $c_jl_UnsupportedOperationException().init___T("tail of empty list")
-});
 $c_sci_Nil$.prototype.isEmpty__Z = (function() {
   return true
+});
+$c_sci_Nil$.prototype.tail__sci_List = (function() {
+  throw new $c_jl_UnsupportedOperationException().init___T("tail of empty list")
 });
 $c_sci_Nil$.prototype.equals__O__Z = (function(that) {
   if ($is_sc_GenSeq(that)) {
@@ -22989,12 +23204,12 @@ $c_scm_ListBuffer.prototype.lengthCompare__I__I = (function(len) {
   var this$1 = this.scala$collection$mutable$ListBuffer$$start$6;
   return $f_sc_LinearSeqOptimized__lengthCompare__I__I(this$1, len)
 });
+$c_scm_ListBuffer.prototype.apply__O__O = (function(v1) {
+  return this.apply__I__O($uI(v1))
+});
 $c_scm_ListBuffer.prototype.sameElements__sc_GenIterable__Z = (function(that) {
   var this$1 = this.scala$collection$mutable$ListBuffer$$start$6;
   return $f_sc_LinearSeqOptimized__sameElements__sc_GenIterable__Z(this$1, that)
-});
-$c_scm_ListBuffer.prototype.apply__O__O = (function(v1) {
-  return this.apply__I__O($uI(v1))
 });
 $c_scm_ListBuffer.prototype.exists__F1__Z = (function(p) {
   var this$1 = this.scala$collection$mutable$ListBuffer$$start$6;
